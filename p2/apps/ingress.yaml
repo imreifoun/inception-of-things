@@ -25,6 +25,7 @@ spec:
             name: svc-app2
             port:
               number: 80
+      
 
   - http:
       paths:
