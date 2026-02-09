@@ -5,8 +5,8 @@ Vagrant.configure("2") do |config|
     controller.vm.hostname = "areifounS"
     controller.vm.network "private_network", ip: "192.168.56.110"
 
-    controller.vm.synced_folder "./confs", "/vagrant"
-    controller.vm.synced_folder "./scripts", "/vagrant"
+    controller.vm.synced_folder "./confs", "/vagrant/confs"
+    controller.vm.synced_folder "./scripts", "/vagrant/scripts"
 
     controller.vm.provider "virtualbox" do |vb|
       vb.memory = 1024
@@ -21,10 +21,10 @@ Vagrant.configure("2") do |config|
       
       until kubectl get nodes >/dev/null 2>&1; do
         echo "Waiting for Kubernetes API..."
-        sleep 3
+        sleep 5
       done
 
-      cd / && cd vagrant && sudo chmod +x execute.sh && ./execute.sh
+      cd / && cd vagrant/scripts && sudo chmod +x execute.sh && ./execute.sh
     
     SHELL
   end
