@@ -27,8 +27,8 @@ Vagrant.configure("2") do |config|
       done
 
       echo "[+] NODE TOKEN"
-      sudo mkdir -p /vagrant/k3s
-      sudo sudo cp /var/lib/rancher/k3s/server/node-token /vagrant/k3s/token
+      sudo mkdir -p /vagrant/confs
+      sudo sudo cp /var/lib/rancher/k3s/server/node-token /vagrant/confs/token
       echo "[+] DONE !"
 
     SHELL
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
 
     agent.vm.provision "shell", inline: <<-SHELL
 
-      TOKEN=$(sudo cat /vagrant/k3s/token)
+      TOKEN=$(sudo cat /vagrant/confs/token)
 
       curl -sfL https://get.k3s.io | \
         INSTALL_K3S_EXEC="--node-ip=192.168.56.111" \
